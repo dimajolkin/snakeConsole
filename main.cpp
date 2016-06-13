@@ -1,10 +1,12 @@
+#include "iostream"
+
 #include "driver/Driver.h"
 #include "scene/Map.h"
 #include "scene/Color.h"
 #include "scene/Scene.h"
 
-#include "iostream"
-#include "scene/SectorFactory.h"
+#include "stdio.h"
+
 
 class InputDriver {
     char simbol;
@@ -15,7 +17,7 @@ public:
     }
 
     char getKey() {
-        simbol = (char) getch();
+        simbol = (char) getchar();
         return simbol;
     }
 
@@ -24,14 +26,13 @@ public:
 
 using namespace std;
 
-int main() {
+int main(int argc, char* argv[]) {
     Scene *scene = new Scene();
     Player *p = new Player(3, 3, Color::BLUE);
     scene->add(p);
     scene->refresh();
 
-
-    InputDriver *inputDriver = new InputDriver;
+    InputDriver *inputDriver = new InputDriver();
     while (inputDriver->isRun()) {
         switch (inputDriver->getKey()) {
             case 'w':
@@ -49,7 +50,8 @@ int main() {
             default:
                 NULL;
         }
-        scene->refresh();
+//        scene->refresh();
+        p->draw();
     }
 
     delay(500);

@@ -7,12 +7,9 @@
 
 
 #include "Sector.h"
-#include "SectorFactory.h"
 
 class Player {
-
     Sector *start;
-    int color;
 public:
 
     Player() {
@@ -20,8 +17,7 @@ public:
     }
 
     Player(int x, int y, int color) {
-        start = SectorFactory::create(x, y, color);
-        color = color;
+        start = Sector::create(x, y, color);
     }
 
     void draw() {

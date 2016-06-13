@@ -8,7 +8,6 @@
 #include "../driver/Driver.h"
 #include "Sector.h"
 #include "SectorTypeEnum.h"
-#include "SectorFactory.h"
 
 class Map {
     int _width;
@@ -16,22 +15,19 @@ class Map {
 
     Sector map[100][100];
 
-    Driver *driver;
-
 public:
 
     Map(int width, int height) {
         _width = width;
         _height = height;
 
-
-        int lenX = 50;//driver->getMaxX() / _width - 1;
-        int lenY = driver->getMaxY() / _height;
-        int kef = 10;
+        int lenX = 5;//driver->getMaxX() / _width - 1;
+        int lenY = 5;//driver->getMaxY() / _height;
+        int kef = 2;
 
         for (int i = 0; i <= _width; ++i) {
             for (int j = 0; j <= _height; ++j) {
-                Sector *sector = SectorFactory::create(i, j);
+                Sector *sector = Sector::create(i, j);
                 sector->draw();
                 this->set(i, j, sector);
             }
@@ -56,7 +52,7 @@ public:
     }
 
     void refresh() {
-        cleardevice();
+//        cleardevice();
         for (int i = 0; i <= _width; ++i) {
             for (int j = 0; j <= _height; ++j) {
                 get(i,j)->draw();
