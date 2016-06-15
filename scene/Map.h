@@ -5,7 +5,7 @@
 #ifndef SNAKE_MAP_H
 #define SNAKE_MAP_H
 
-#include "../driver/Driver.h"
+#include "../driver/glut/Driver.h"
 #include "Sector.h"
 #include "SectorTypeEnum.h"
 

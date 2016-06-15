@@ -1,59 +1,48 @@
-#include "iostream"
-
-#include "driver/Driver.h"
-#include "scene/Map.h"
-#include "scene/Color.h"
-#include "scene/Scene.h"
-
-#include "stdio.h"
-
-
-class InputDriver {
-    char simbol;
-public:
-
-    bool isRun() {
-        return simbol != '0';
-    }
-
-    char getKey() {
-        simbol = (char) getchar();
-        return simbol;
-    }
-
-};
-
-
+#include "include.h"
 using namespace std;
 
+Driver *driver;
+Scene  *scene;
+
 int main(int argc, char* argv[]) {
-    Scene *scene = new Scene();
-    Player *p = new Player(3, 3, Color::BLUE);
-    scene->add(p);
-    scene->refresh();
+    driver = Driver::getInstance();
+    driver->setWindowSize(500,500);
+    driver->setTitle("Snake");
+    driver->setPosition(50, 50);
 
-    InputDriver *inputDriver = new InputDriver();
-    while (inputDriver->isRun()) {
-        switch (inputDriver->getKey()) {
-            case 'w':
-                p->top();
-                break;
-            case 's':
-                p->bottom();
-                break;
-            case 'a':
-                p->left();
-                break;
-            case 'd':
-                p->right();
-                break;
-            default:
-                NULL;
-        }
+    scene =  new Scene();
+
+    driver->loop([](){
+        driver->drawLine(0,0,1,1);
+
+    });
+
+//    Player *p = new Player(3, 3, Color::BLUE);
+//    scene->add(p);
+
+
+//    InputDriver *inputDriver = new InputDriver();
+//    while (inputDriver->isRun()) {
+//        switch (inputDriver->getKey()) {
+//            case 'w':
+//                p->top();
+//                break;
+//            case 's':
+//                p->bottom();
+//                break;
+//            case 'a':
+//                p->left();
+//                break;
+//            case 'd':
+//                p->right();
+//                break;
+//            default:
+//                NULL;
+//        }
 //        scene->refresh();
-        p->draw();
-    }
+//        p->draw();
+//    }
 
-    delay(500);
+    driver->run(argc, argv);
     return 0;
 }

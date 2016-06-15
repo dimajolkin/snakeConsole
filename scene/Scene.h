@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <iostream>
-#include "../driver/Driver.h"
+#include "../driver/glut/Driver.h"
 #include "Map.h"
 #include "Player.h"
 

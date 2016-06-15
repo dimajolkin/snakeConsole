@@ -6,7 +6,7 @@
 #define SNAKE_SECTOR_H
 
 
-#include "../driver/Driver.h"
+#include "../driver/glut/Driver.h"
 #include "Color.h"
 
 class Sector {
@@ -53,8 +53,8 @@ public:
     {
         lenX = 5;
         lenY = 5;
-        setcolor(color);
-        driver->drawBar(lenX * x + 10 * (x - 1), lenX * y + 10 * (y - 1), lenX, lenX);
+        driver->setColor(color);
+        driver->drawBar(lenX * x + 10 * (x - 1), lenX * y + 10 * (y - 1), lenX, lenX, this->color);
     }
 
 

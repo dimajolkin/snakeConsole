@@ -1,2 +1,2 @@
 app: 
-	g++ ./main.cpp  -o ./a.out -lX11 -lgraph && ./a.out
+	g++ ./main.cpp -lGL -lglut -std=c++14 -o ./a.out  && ./a.out
