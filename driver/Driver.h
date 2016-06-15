@@ -5,31 +5,37 @@
 #ifndef SNAKE_DRIVER_H
 #define SNAKE_DRIVER_H
 
-#include<graphics.h>
+#include <graphics.h>
+#include <X11/Xlib.h>
 
 class Driver {
 private:
     int gd;
     int gm;
+
+
+
 public:
-    Driver()
-    {
+    Driver() {
+        std::cout << "init driver" << std::endl;
         gm = DETECT;
+        XInitThreads();
         initgraph(&gd, &gm, NULL);
     }
-
-    int getMaxX()
-    {
-        return  getmaxx();
+    static Driver *getInstance() {
+        static Driver * instance = new Driver;
+        return instance;
     }
 
-    int getMaxY()
-    {
-        return  getmaxy();
+    int getMaxX() {
+        return getmaxx();
     }
 
-    ~Driver()
-    {
+    int getMaxY() {
+        return getmaxy();
+    }
+
+    ~Driver() {
         closegraph();
     }
 
@@ -40,21 +46,23 @@ public:
 //        ellipse(x, y + 200, 0, 360, 100, 50);
     }
 
-    void drawRectangle(int left, int top, int right, int bottom)
-    {
+    void drawRectangle(int left, int top, int right, int bottom) {
         rectangle(left, top, right, bottom);
     }
 
-    void drawCircle(int x, int y, int radius)
-    {
+    void drawCircle(int x, int y, int radius) {
         circle(x, y, radius);
     }
 
-    void drawBar(int left, int top, int width, int height)
-    {
-        if (left > 0 && top > 0) {
-            bar(left, top, left + width, top + height);
+    void drawBar(int left, int top, int width, int height) {
+        try {
+            if (left > 0 && top > 0) {
+                bar(left, top, left + width, top + height);
+            }
+        } catch(...) {
+
         }
+
     }
 };
 

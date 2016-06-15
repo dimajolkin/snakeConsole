@@ -17,7 +17,7 @@ class Scene {
     std::vector<Player> players;
 
     void init() {
-        map = new Map(5, 5);
+        map = new Map(20, 20);
         map->refresh();
     }
 

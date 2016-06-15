@@ -7,16 +7,24 @@
 
 
 #include "../driver/Driver.h"
+#include "Color.h"
 
 class Sector {
 
     int x;
     int y;
     int color;
-
-    int lenX, lenY;
     Driver *driver;
+    int lenX, lenY;
 public:
+
+    static Sector *create(int x, int y, int color) {
+        return new Sector(Driver::getInstance(), x, y, color);
+    }
+
+    static Sector *create(int x, int y) {
+        return new Sector(Driver::getInstance(), x, y, Color::WHITE);
+    }
 
     Sector()
     {
@@ -43,8 +51,8 @@ public:
 
     void draw()
     {
-        lenX = 50;
-        lenY = 50;
+        lenX = 5;
+        lenY = 5;
         setcolor(color);
         driver->drawBar(lenX * x + 10 * (x - 1), lenX * y + 10 * (y - 1), lenX, lenX);
     }
