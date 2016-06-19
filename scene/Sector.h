@@ -15,7 +15,7 @@ class Sector {
     int y;
     int color;
     Driver *driver;
-    int lenX, lenY;
+    float lenX, lenY;
 public:
 
     static Sector *create(int x, int y, int color) {
@@ -51,10 +51,17 @@ public:
 
     void draw()
     {
-        lenX = 5;
-        lenY = 5;
+        float d = 0.02;
+        float width =  0.080;
+        float height = 0.080;
         driver->setColor(color);
-        driver->drawBar(lenX * x + 10 * (x - 1), lenX * y + 10 * (y - 1), lenX, lenX, this->color);
+        driver->drawBar(
+                (float) (-0.99 + width * x + d * x),
+                (float) (0.9 - height * y - d * y),
+                width,
+                height,
+                this->color
+        );
     }
 
 
@@ -73,8 +80,6 @@ public:
     virtual void bottom() {
         y++;
     }
-
-
 
 };
 #endif //SNAKE_SECTOR_H

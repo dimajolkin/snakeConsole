@@ -27,7 +27,7 @@ public:
 
         for (int i = 0; i <= _width; ++i) {
             for (int j = 0; j <= _height; ++j) {
-                Sector *sector = Sector::create(i, j);
+                Sector *sector = Sector::create(i, j, Color::WHITE);
                 sector->draw();
                 this->set(i, j, sector);
             }

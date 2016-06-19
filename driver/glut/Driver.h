@@ -91,8 +91,8 @@ public:
 
     void drawRectangle(float left, float top, float width, float height, int color)
     {
-        this->setColor(Color::BLUE);
-        glRectf(left,top, width, height);
+        this->setColor(color);
+        glRectf(left,top, left + width,  top + height);
         glEnd();
     }
 
@@ -109,10 +109,10 @@ public:
                 glColor3f(0, 0, 1);
                 break;
             case Color::BLACK:
-                glColor3f(1, 1, 1);
+                glColor3f(0, 0, 0);
                 break;
             case Color::WHITE:
-                glColor3f(0, 0, 1);
+                glColor3f(1, 1, 1);
                 break;
 
         }

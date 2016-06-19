@@ -1,48 +1,58 @@
 #include "include.h"
+#include <thread>
+
 using namespace std;
 
 Driver *driver;
-Scene  *scene;
+Scene *scene;
 
-int main(int argc, char* argv[]) {
+InputDriver *inputDriver = new InputDriver;
+Player *p;
+
+void loop(int argc, char *argv[]) {
+
+    driver->loop([]() {
+        scene->refresh();
+    });
+    driver->run(argc, argv);
+}
+
+
+int main(int argc, char *argv[]) {
     driver = Driver::getInstance();
-    driver->setWindowSize(500,500);
+    driver->setWindowSize(800, 800);
     driver->setTitle("Snake");
     driver->setPosition(50, 50);
 
-    scene =  new Scene();
+    p = new Player(3, 3, Color::RED);
+    scene = new Scene();
+    scene->add(p);
 
-    driver->loop([](){
-        driver->drawLine(0,0,1,1);
+    std::thread render(loop, argc, argv);
+    std::cout << "Start loop" ;
 
-    });
+    while (inputDriver->isRun()) {
+        std::cout << "-> loop \n" ;
+        switch (inputDriver->getKey()) {
+            case 'w':
+                p->top();
+                break;
+            case 's':
+                p->bottom();
+                break;
+            case 'a':
+                p->left();
+                break;
+            case 'd':
+                p->right();
+                break;
+            default:
+                NULL;
+        }
 
-//    Player *p = new Player(3, 3, Color::BLUE);
-//    scene->add(p);
+    }
 
-
-//    InputDriver *inputDriver = new InputDriver();
-//    while (inputDriver->isRun()) {
-//        switch (inputDriver->getKey()) {
-//            case 'w':
-//                p->top();
-//                break;
-//            case 's':
-//                p->bottom();
-//                break;
-//            case 'a':
-//                p->left();
-//                break;
-//            case 'd':
-//                p->right();
-//                break;
-//            default:
-//                NULL;
-//        }
-//        scene->refresh();
-//        p->draw();
-//    }
-
-    driver->run(argc, argv);
+    std::cout << "Stop input commands" ;
+    render.join();
     return 0;
 }
