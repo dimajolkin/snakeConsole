@@ -16,6 +16,7 @@ protected:
     int y = 50;
     const char *title = "Driver Glut";
     void (* callback)( void );
+    void (* keyboardFunc)( unsigned char, int, int );
 
     static void draw(void)
     {
@@ -118,6 +119,17 @@ public:
         }
     }
 
+    void setKeyboard(void (* callback)( unsigned char, int, int ))
+    {
+        keyboardFunc = callback;
+    }
+
+    void refresh()
+    {
+        glutPostRedisplay();
+    }
+
+
     void run(int argc, char **argv)
     {
         glutInit(&argc, argv);
@@ -138,6 +150,7 @@ public:
 
         glutDisplayFunc(draw);
 
+        glutKeyboardFunc(keyboardFunc);
         // Loop require by OpenGL
         glutMainLoop();
     }

@@ -6,53 +6,44 @@ using namespace std;
 Driver *driver;
 Scene *scene;
 
-InputDriver *inputDriver = new InputDriver;
 Player *p;
 
-void loop(int argc, char *argv[]) {
+void keyboard(unsigned char key, int x, int y) {
+    switch (key) {
+        case 'w':
+            p->top();
+            break;
+        case 's':
+            p->bottom();
+            break;
+        case 'a':
+            p->left();
+            break;
+        case 'd':
+            p->right();
+            break;
+        default:
+            NULL;
+    }
 
-    driver->loop([]() {
-        scene->refresh();
-    });
-    driver->run(argc, argv);
+    driver->refresh();
 }
 
 
 int main(int argc, char *argv[]) {
-    driver = Driver::getInstance();
-    driver->setWindowSize(800, 800);
-    driver->setTitle("Snake");
-    driver->setPosition(50, 50);
-
     p = new Player(3, 3, Color::RED);
     scene = new Scene();
     scene->add(p);
 
-    std::thread render(loop, argc, argv);
-    std::cout << "Start loop" ;
+    driver = Driver::getInstance();
+    driver->setWindowSize(800, 800);
+    driver->setTitle("Snake");
+    driver->setPosition(50, 50);
+    driver->setKeyboard(keyboard);
+    driver->loop([]() {
+        scene->refresh();
+    });
+    driver->run(argc, argv);
 
-    while (inputDriver->isRun()) {
-        std::cout << "-> loop \n" ;
-        switch (inputDriver->getKey()) {
-            case 'w':
-                p->top();
-                break;
-            case 's':
-                p->bottom();
-                break;
-            case 'a':
-                p->left();
-                break;
-            case 'd':
-                p->right();
-                break;
-            default:
-                NULL;
-        }
-
-    }
-
-    std::cout << "Stop input commands" ;
-    render.join();
     return 0;
 }

@@ -13,8 +13,8 @@ public:
     }
 
     char getKey() {
-//        simbol = (char) getchar();
-        std::cin >> simbol;
+        simbol = (char) getchar();
+//        std::cin >> simbol;
         return simbol;
     }
 
