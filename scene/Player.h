@@ -9,6 +9,9 @@
 #include "Sector.h"
 
 class Player {
+protected:
+    int level = 1;
+
     Sector *start;
 public:
 
@@ -18,6 +21,25 @@ public:
 
     Player(int x, int y, int color) {
         start = Sector::create(x, y, color);
+    }
+
+    Player(Point * point, int color) {
+        start = Sector::create(point->getX(), point->getY(), color);
+    }
+
+    Point * getPosition() {
+        return  start->getPosition();
+    }
+    void incLevel() {
+        level++;
+    }
+
+    void decLevel() {
+        level--;
+    }
+
+    bool isLife() {
+        return level > 0;
     }
 
     void draw() {

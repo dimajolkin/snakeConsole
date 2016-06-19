@@ -49,6 +49,15 @@ public:
         this->draw();
     }
 
+    Point * getPosition() {
+        return  new Point(x, y);
+    }
+
+    int getColor()
+    {
+        return this->color;
+    }
+
     void draw()
     {
         float d = 0.02;

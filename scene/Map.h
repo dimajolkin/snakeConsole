@@ -34,6 +34,10 @@ public:
         }
     }
 
+    bool isEmpty(int x, int y) {
+        return  get(x, y)->getColor() == Color::WHITE;
+    }
+
     int getMaxX() {
         return _width;
     }
@@ -51,8 +55,22 @@ public:
         map[x][y] = *sector;
     }
 
+    Point* getFeeRandomPoint() {
+        int x = 0;
+        int y = 0;
+        while(true) {
+            x = rand() % getMaxX();
+            y = rand() % getMaxY();
+            if (isEmpty(x, y)) {
+                break;
+            }
+        }
+
+
+        return new Point(x, y);
+    }
+
     void refresh() {
-//        cleardevice();
         for (int i = 0; i <= _width; ++i) {
             for (int j = 0; j <= _height; ++j) {
                 get(i,j)->draw();

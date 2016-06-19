@@ -6,7 +6,7 @@ using namespace std;
 Driver *driver;
 Scene *scene;
 
-Player *p;
+Player *p = new Player(1, 1, Color::RED);
 
 void keyboard(unsigned char key, int x, int y) {
     switch (key) {
@@ -22,6 +22,8 @@ void keyboard(unsigned char key, int x, int y) {
         case 'd':
             p->right();
             break;
+        case '1':
+            scene->addFoodInRandomPosition();
         default:
             NULL;
     }
@@ -31,7 +33,6 @@ void keyboard(unsigned char key, int x, int y) {
 
 
 int main(int argc, char *argv[]) {
-    p = new Player(3, 3, Color::RED);
     scene = new Scene();
     scene->add(p);
 
