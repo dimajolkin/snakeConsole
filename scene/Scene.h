@@ -15,8 +15,11 @@
 
 class Scene {
     Map *map;
-    std::vector<Player> players;
-    std::vector<Food> foods;
+    PlayerCollection players;
+
+    FoodCollection foods;
+
+    SnakePlayer *p;
 
     void init() {
         map = new Map(20, 20);
@@ -33,39 +36,45 @@ public:
         return map;
     }
 
-    void add(Player *player) {
-        players.push_back(*player);
+    void add(SnakePlayer *player) {
+        players.add(player);
+//       p = player;
     }
 
-    void add(Food * food) {
-        foods.push_back(*food);
+    void add(Food *food) {
+        foods.add(food);
     }
 
     void addFoodInRandomPosition() {
         Point *p = map->getFeeRandomPoint();
-        Food * f = new Food(p);
+        Food *f = new Food(p);
         add(f);
     }
 
     void refresh() {
         map->refresh();
 
-        for (std::vector<Player>::iterator player = players.begin(); player != players.end(); ++player) {
-
-            for (std::vector<Food>::iterator food = foods.begin(); food != foods.end(); ++food) {
-//                if ((*player).getPosition() == (*food).getPosition()) {
-//                    (*player).incLevel();
-//                    std::cout << "inc level" << std::endl;
-//                }
+        players.foreach([&](SnakePlayer *player) {
+            if (foods.isEat(player->getPosition())) {
+                (*player).incLevel();
+                std::cout << "inc level" << std::endl;
             }
 
-            (*player).draw();
+        });
 
-        }
+        players.draw();
+//        for (std::vector<SnakePlayer>::iterator player = players.begin(); player != players.end(); ++player) {
 
-        for (std::vector<Food>::iterator food = foods.begin(); food != foods.end(); ++food) {
-            (*food).draw();
-        }
+
+//            player->draw();
+//        }
+
+
+//        p->draw();
+
+
+        foods.draw();
+
     }
 
 };

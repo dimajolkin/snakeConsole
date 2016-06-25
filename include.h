@@ -1,4 +1,6 @@
 #include "iostream"
+#include "vector"
+
 
 #include "types/Point.h"
 #include "scene/Color.h"
@@ -10,7 +12,15 @@
 #include "driver/glut/Driver.h"
 
 #include "scene/Map.h"
+
+
+#include "scene/Player.h"
+#include "scene/SnakePlayer.h"
+#include "scene/Food.h"
+#include "scene/FoodCollection.h"
+#include "scene/PlayerCollection.h"
+
 #include "scene/Color.h"
 #include "scene/Scene.h"
-#include "scene/Food.h"
+
 #include "stdio.h"

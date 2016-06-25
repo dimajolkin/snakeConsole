@@ -6,7 +6,7 @@ using namespace std;
 Driver *driver;
 Scene *scene;
 
-Player *p = new Player(1, 1, Color::RED);
+SnakePlayer *p = new SnakePlayer(1, 1, Color::RED);
 
 void keyboard(unsigned char key, int x, int y) {
     switch (key) {
@@ -31,6 +31,10 @@ void keyboard(unsigned char key, int x, int y) {
     driver->refresh();
 }
 
+void render() {
+    scene->refresh();
+}
+
 
 int main(int argc, char *argv[]) {
     scene = new Scene();
@@ -41,9 +45,7 @@ int main(int argc, char *argv[]) {
     driver->setTitle("Snake");
     driver->setPosition(50, 50);
     driver->setKeyboard(keyboard);
-    driver->loop([]() {
-        scene->refresh();
-    });
+    driver->loop(render);
     driver->run(argc, argv);
 
     return 0;

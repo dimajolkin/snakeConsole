@@ -53,6 +53,10 @@ public:
         return  new Point(x, y);
     }
 
+    std::string toString() {
+        return " position ";
+    }
+
     int getColor()
     {
         return this->color;

@@ -23,9 +23,12 @@ public:
     int getY() {
         return this->y;
     }
+
+
+
+    bool compare(Point *point) {
+        return  this->getX() == point->getX() && this->getY() == point->getY();
+    }
 };
 
-//bool operator==(const Point& p1, const Point& p2) {
-//    return p1.getX() == p2.getX() && p1.getY() == p2.getY();
-//}
 #endif //SNAKE_POINT_H

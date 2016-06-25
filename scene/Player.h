@@ -42,7 +42,7 @@ public:
         return level > 0;
     }
 
-    void draw() {
+    virtual void draw() {
         start->draw();
     }
 

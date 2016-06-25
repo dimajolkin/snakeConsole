@@ -5,24 +5,60 @@
 #ifndef SNAKE_SNAKEPLAYER_H
 #define SNAKE_SNAKEPLAYER_H
 class SnakePlayer : public Player {
+protected:
     std::vector<Sector> sectors;
+    Sector *last;
+    void saveLastSector() {
+        last = Sector::create(
+                start->getPosition()->getX() ,
+                start->getPosition()->getY(),
+                Color::RED
+        );
+        sectors.push_back(*last);
+
+        while (sectors.size() > level) {
+            sectors.erase(sectors.begin());
+        }
+    }
 
 public:
-    virtual void left() {
+    int count;
+    SnakePlayer(int x, int y, int color) {
+        sectors.reserve(100);
+        start = Sector::create(x, y, color);
+    }
+
+    void left() {
+        saveLastSector();
         start->left();
+
     }
 
-    virtual void right() {
+    void right() {
+        saveLastSector();
         start->right();
+
     }
 
-    virtual void top() {
+    void top() {
+        saveLastSector();
         start->top();
+
     }
 
-    virtual void bottom() {
+    void bottom() {
+        saveLastSector();
         start->bottom();
+
     }
+
+    virtual void draw() {
+        for (std::vector<Sector>::iterator sector = sectors.begin(); sector != sectors.end(); ++sector) {
+            (*sector).draw();
+        }
+        start->draw();
+    }
+
 };
 
 #endif //SNAKE_SNAKEPLAYER_H
