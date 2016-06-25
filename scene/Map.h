@@ -34,6 +34,14 @@ public:
         }
     }
 
+    bool isValid(Point *p) {
+        return  (
+                (p->getX() >= 0 && p->getX() < _width)
+                && (p->getY() >= 0 && p->getY() < _height)
+        );
+
+    }
+
     bool isEmpty(int x, int y) {
         return  get(x, y)->getColor() == Color::WHITE;
     }

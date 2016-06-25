@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const unsigned int SPEED = 400; //ms
+const unsigned int SPEED = 200; //ms
 
 Driver *driver;
 Scene *scene;
@@ -39,6 +39,7 @@ void timer(int) {
 
 int main(int argc, char *argv[]) {
     scene = new Scene();
+    scene->addFoodInRandomPosition();
     scene->add(p);
 
     driver = Driver::getInstance();
