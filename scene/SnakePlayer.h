@@ -8,6 +8,8 @@ class SnakePlayer : public Player {
 protected:
     std::vector<Sector> sectors;
     Sector *last;
+    char lastKey = InputDriver::KEY_RIGHT;
+
     void saveLastSector() {
         last = Sector::create(
                 start->getPosition()->getX() ,
@@ -28,6 +30,15 @@ public:
         start = Sector::create(x, y, color);
     }
 
+
+    void autoMove() {
+        move(lastKey);
+        std::cout << "move " << lastKey << "\n";
+    }
+    void setKey(char key) {
+        lastKey = key;
+    }
+
     void left() {
         saveLastSector();
         start->left();
@@ -37,7 +48,6 @@ public:
     void right() {
         saveLastSector();
         start->right();
-
     }
 
     void top() {
@@ -49,12 +59,14 @@ public:
     void bottom() {
         saveLastSector();
         start->bottom();
-
     }
 
     virtual void draw() {
         for (std::vector<Sector>::iterator sector = sectors.begin(); sector != sectors.end(); ++sector) {
             (*sector).draw();
+            if (sector->getPosition()->compare(start->getPosition())) {
+                die();
+            }
         }
         start->draw();
     }

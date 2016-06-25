@@ -9,6 +9,7 @@
 
 class Driver: public  AbstractDriver {
 protected:
+    bool isInit = false;
 
     int width = 500;
     int height = 500;
@@ -17,6 +18,9 @@ protected:
     const char *title = "Driver Glut";
     void (* callback)( void );
     void (* keyboardFunc)( unsigned char, int, int );
+
+    int timer = 0;
+    void (* timerCallable)( int );
 
     static void draw(void)
     {
@@ -129,10 +133,21 @@ public:
         glutPostRedisplay();
     }
 
+    void setTimer(int time, void (* callback)( int )) {
+        if (isInit) {
+            glutTimerFunc(time, callback, 0);
+        } else {
+            timerCallable = callback;
+        }
+
+        this->timer = time;
+    }
+
 
     void run(int argc, char **argv)
     {
         glutInit(&argc, argv);
+        isInit = true;
 
         /*Setting up  The Display
         /    -RGB color model + Alpha Channel = GLUT_RGBA
@@ -149,6 +164,8 @@ public:
         glutCreateWindow(this->title);
 
         glutDisplayFunc(draw);
+
+        glutTimerFunc(timer, timerCallable, 0);
 
         glutKeyboardFunc(keyboardFunc);
         // Loop require by OpenGL

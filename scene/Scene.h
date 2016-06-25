@@ -53,28 +53,23 @@ public:
 
     void refresh() {
         map->refresh();
-
         players.foreach([&](SnakePlayer *player) {
             if (foods.isEat(player->getPosition())) {
-                (*player).incLevel();
+                player->incLevel();
+                addFoodInRandomPosition();
                 std::cout << "inc level" << std::endl;
+            }
+
+            if (!player->isLife()) {
+                std::cout << "Player die \n";
+                player->clearLevels();
+                player->recover();
             }
 
         });
 
         players.draw();
-//        for (std::vector<SnakePlayer>::iterator player = players.begin(); player != players.end(); ++player) {
-
-
-//            player->draw();
-//        }
-
-
-//        p->draw();
-
-
         foods.draw();
-
     }
 
 };

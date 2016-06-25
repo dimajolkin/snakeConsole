@@ -21,5 +21,6 @@ public:
     void draw() {
         p->draw();
     }
+
 };
 #endif //SNAKE_PLAYERCOLLECTION_H
