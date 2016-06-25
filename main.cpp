@@ -29,13 +29,9 @@ void keyboard(unsigned char key, int x, int y) {
     driver->refresh();
 }
 
-void render() {
-    scene->refresh();
-}
-
 void timer(int) {
     p->autoMove();
-    std::cout<<  "Run timer\n";
+    //синхронизация множества сетевых змей
     driver->refresh();
     driver->setTimer(SPEED, timer);
 }
@@ -50,7 +46,9 @@ int main(int argc, char *argv[]) {
     driver->setTitle("Snake");
     driver->setPosition(50, 50);
     driver->setKeyboard(keyboard);
-    driver->loop(render);
+    driver->loop([](){
+        scene->refresh();
+    });
     driver->setTimer(0, timer);
     driver->run(argc, argv);
 
