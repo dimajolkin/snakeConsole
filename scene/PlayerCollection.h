@@ -6,9 +6,9 @@
 #define SNAKE_PLAYERCOLLECTION_H
 class PlayerCollection {
 
-   std::vector<SnakePlayer*> players;
+   std::vector<Player*> players;
 public:
-    void add(SnakePlayer *player) {
+    void add(Player *player) {
         players.push_back(&(*player));
     }
 
@@ -19,14 +19,14 @@ public:
     template<class UnaryFunction>
     void foreach(UnaryFunction callback) {
 
-        for (std::vector<SnakePlayer*>::iterator p = players.begin(); p != players.end(); ++p) {
+        for (std::vector<Player*>::iterator p = players.begin(); p != players.end(); ++p) {
             callback(*p);
         }
 
     }
 
     void draw() {
-       foreach([](SnakePlayer *player) {
+       foreach([](Player *player) {
            player->draw();
        });
     }

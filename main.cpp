@@ -12,8 +12,8 @@ Scene *scene;
 SnakePlayer *p = new SnakePlayer(1, 1, Color::RED);
 Controller<SnakePlayer> controller1(p, 'w', 's', 'a', 'd');
 
-SnakePlayer *p2 = new SnakePlayer(1, 5, Color::GREEN);
-Controller<SnakePlayer> controller2(p2, 't', 'g', 'f', 'h');
+Player *p2 = new Player(1, 5, Color::GREEN);
+Controller<Player> controller2(p2, 't', 'g', 'f', 'h');
 
 
 

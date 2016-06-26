@@ -14,6 +14,7 @@ protected:
     char key_right = 'd';
 
     char up_key = 'd';
+
     Player *player;
 public:
     /**

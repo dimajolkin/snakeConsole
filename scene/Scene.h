@@ -36,7 +36,7 @@ public:
         return map;
     }
 
-    void add(SnakePlayer *player) {
+    void add(Player *player) {
         players.add(player);
 //       p = player;
     }
@@ -55,7 +55,7 @@ public:
         map->refresh();
 
         //проверка всех игроков
-        players.foreach([&](SnakePlayer *player) {
+        players.foreach([&](Player *player) {
 
             //не вышли ли за пределы и не врезались ли в стену
             if (!map->isValid(player->getPosition())) {
