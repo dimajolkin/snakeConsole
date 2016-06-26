@@ -11,7 +11,7 @@ class SectorTypeEnum {
 public:
     static const unsigned int TYPE_EMPTY = 0;
     static const unsigned int TYPE_WALL = 1;
-    static const unsigned int TYPE_PALAYER = 2;
+    static const unsigned int TYPE_PLAYER = 2;
 };
 
 

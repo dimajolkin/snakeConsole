@@ -5,28 +5,21 @@
 #ifndef SNAKE_FOODCOLLECTION_H
 #define SNAKE_FOODCOLLECTION_H
 
-class FoodCollection {
-protected:
-    std::vector<Food> foods;
+class FoodCollection : public Collection<Food> {
 public:
     FoodCollection() {}
 
     void draw() {
-        for (std::vector<Food>::iterator food = foods.begin(); food != foods.end(); ++food) {
-            (*food).draw();
-        }
-    }
-
-    void add(Food * food) {
-        foods.push_back(*food);
+        foreach([](Food * food){
+            food->draw();
+        });
     }
 
     bool isEat(Point *point) {
 
-        for (std::vector<Food>::iterator food = foods.begin(); food != foods.end(); ++food) {
-
-            if (point->compare(food->getPosition())) {
-                foods.erase(food);
+        for (auto food = collection.begin(); food != collection.end(); ++food) {
+            if (point->compare((*food)->getPosition())) {
+                collection.erase(food);
                 return true;
             }
         }

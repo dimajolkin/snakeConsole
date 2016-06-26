@@ -23,7 +23,7 @@ protected:
     }
 
 public:
-    int count;
+
     SnakePlayer(int x, int y, int color) {
         sectors.reserve(100);
         start = Sector::create(x, y, color);
@@ -52,7 +52,7 @@ public:
         start->bottom();
     }
 
-    virtual void draw() {
+    void draw() {
         for (std::vector<Sector>::iterator sector = sectors.begin(); sector != sectors.end(); ++sector) {
             (*sector).draw();
             if (sector->getPosition()->compare(start->getPosition())) {

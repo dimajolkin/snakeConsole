@@ -15,8 +15,6 @@ Controller<SnakePlayer> controller1(p, 'w', 's', 'a', 'd');
 Player *p2 = new Player(1, 5, Color::GREEN);
 Controller<Player> controller2(p2, 't', 'g', 'f', 'h');
 
-
-
 void keyboard(unsigned char key, int x, int y) {
 
     controller1.upKey(key);

@@ -7,7 +7,8 @@
 
 #include <GL/glut.h>
 
-class Driver: public  AbstractDriver {
+class Driver: public  AbstractDriver
+{
 protected:
     bool isInit = false;
 
@@ -22,8 +23,8 @@ protected:
     int timer = 0;
     void (* timerCallable)( int );
 
-    static void draw(void)
-    {
+    static void draw(void) {
+
         Driver::getInstance()->beginFrame();
         if (Driver::getInstance()->callback != NULL) {
             Driver::getInstance()->callback();
@@ -31,16 +32,14 @@ protected:
         Driver::getInstance()->endFrame();
     }
 
-    void beginFrame()
-    {
+    void beginFrame() {
         // Black background
         glClearColor(0.0f,0.0f,0.0f,1.0f);
 //        glClear(GL_COLOR_BUFFER_BIT);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    void endFrame()
-    {
+    void endFrame() {
         //        glFlush();
         glutSwapBuffers();
     }
@@ -53,34 +52,28 @@ public:
         return instance;
     }
 
-    Driver() {
-    }
+    Driver() { }
 
 
-    void loop(void (* callback)( void ))
-    {
+    void loop(void (* callback)( void )) {
        this->callback = callback;
     }
 
-    void setPosition(int x, int y)
-    {
+    void setPosition(int x, int y) {
         this->x = x;
         this->y = y;
     }
 
-    void setTitle(const char *title )
-    {
+    void setTitle(const char *title ) {
         this->title = title;
     }
 
-    void setWindowSize(int width, int height)
-    {
+    void setWindowSize(int width, int height) {
         this->width = width;
         this->height = height;
     }
 
-    void drawLine(float x1, float y1, float x2, float y2)
-    {
+    void drawLine(float x1, float y1, float x2, float y2) {
         glLineWidth(2.5);
         glColor3f(1.0, 0.0, 0.0);
         glBegin(GL_LINES);
@@ -89,20 +82,17 @@ public:
         glEnd();
     }
 
-    void drawBar(float left, float top, float width, float height, int color)
-    {
+    void drawBar(float left, float top, float width, float height, int color) {
         drawRectangle(left, top, width, height, color);
     }
 
-    void drawRectangle(float left, float top, float width, float height, int color)
-    {
+    void drawRectangle(float left, float top, float width, float height, int color) {
         this->setColor(color);
         glRectf(left,top, left + width,  top + height);
         glEnd();
     }
 
-    void setColor(int color)
-    {
+    void setColor(int color) {
         switch (color) {
             case Color::RED:
                 glColor3f(1, 0 , 0);
@@ -123,13 +113,11 @@ public:
         }
     }
 
-    void setKeyboard(void (* callback)( unsigned char, int, int ))
-    {
+    void setKeyboard(void (* callback)( unsigned char, int, int )) {
         keyboardFunc = callback;
     }
 
-    void refresh()
-    {
+    void refresh() {
         glutPostRedisplay();
     }
 
@@ -143,9 +131,8 @@ public:
         this->timer = time;
     }
 
+    void run(int argc, char **argv) {
 
-    void run(int argc, char **argv)
-    {
         glutInit(&argc, argv);
         isInit = true;
 

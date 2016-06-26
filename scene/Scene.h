@@ -38,7 +38,6 @@ public:
 
     void add(Player *player) {
         players.add(player);
-//       p = player;
     }
 
     void add(Food *food) {

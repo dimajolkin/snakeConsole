@@ -4,26 +4,10 @@
 
 #ifndef SNAKE_PLAYERCOLLECTION_H
 #define SNAKE_PLAYERCOLLECTION_H
-class PlayerCollection {
+class PlayerCollection : public Collection<Player>  {
 
-   std::vector<Player*> players;
 public:
-    void add(Player *player) {
-        players.push_back(&(*player));
-    }
-
-    PlayerCollection() {
-        players.reserve(1);
-    }
-
-    template<class UnaryFunction>
-    void foreach(UnaryFunction callback) {
-
-        for (std::vector<Player*>::iterator p = players.begin(); p != players.end(); ++p) {
-            callback(*p);
-        }
-
-    }
+    PlayerCollection() {}
 
     void draw() {
        foreach([](Player *player) {
