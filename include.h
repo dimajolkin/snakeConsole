@@ -1,6 +1,10 @@
 #include "iostream"
 #include "vector"
+#include "list"
+#include "algorithm"
 
+
+#include "scene/Controller.h"
 
 #include "types/Point.h"
 #include "scene/Color.h"

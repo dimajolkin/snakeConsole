@@ -35,12 +35,30 @@ public:
     }
 
     bool isValid(Point *p) {
-        return  (
+        return (
                 (p->getX() >= 0 && p->getX() < _width)
                 && (p->getY() >= 0 && p->getY() < _height)
         );
-
     }
+
+    void moveInOppositeSide(Point *p) {
+        if (p->getX() < 0) {
+            p->setX(getMaxX());
+        }
+
+        if (p->getX() > getMaxX()) {
+            p->setX(0);
+        }
+
+        if (p->getY() < 0) {
+            p->setY(getMaxY());
+        }
+
+        if (p->getY() > getMaxY()) {
+            p->setY(0);
+        }
+    }
+
 
     bool isEmpty(int x, int y) {
         return  get(x, y)->getColor() == Color::WHITE;

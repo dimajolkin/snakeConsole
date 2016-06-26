@@ -59,15 +59,14 @@ public:
 
             //не вышли ли за пределы и не врезались ли в стену
             if (!map->isValid(player->getPosition())) {
-                std::cout << "die \n";
-                exit(0);
+                map->moveInOppositeSide(player->getPosition());
             }
+
 
             //может еду съели?
             if (foods.isEat(player->getPosition())) {
                 player->incLevel();
                 addFoodInRandomPosition();
-                std::cout << "inc level" << std::endl;
             }
 
             //мы ещё живы?

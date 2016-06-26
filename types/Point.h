@@ -24,7 +24,13 @@ public:
         return this->y;
     }
 
+    void setX(int x) {
+        this->x = x;
+    }
 
+    void setY(int y) {
+        this->y = y;
+    }
 
     bool compare(Point *point) {
         return  this->getX() == point->getX() && this->getY() == point->getY();

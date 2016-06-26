@@ -10,12 +10,12 @@
 #include "Color.h"
 
 class Sector {
-
-    int x;
-    int y;
+protected:
     int color;
     Driver *driver;
+    Point *point;
     float lenX, lenY;
+
 public:
 
     static Sector *create(int x, int y, int color) {
@@ -26,51 +26,45 @@ public:
         return new Sector(Driver::getInstance(), x, y, Color::WHITE);
     }
 
-    Sector()
-    {
+    Sector() {
 
     }
 
     Sector(int x, int y) {
-        this->x = x;
-        this->y = y;
+        point = new Point(x, y);
     }
 
     Sector(Driver *driver, int x, int y, int color) {
-        this->x = x;
-        this->y = y;
         this->color = color;
         this->driver = driver;
+        point = new Point(x, y);
     }
 
-    void setColor(int color)
-    {
+    void setColor(int color) {
         this->color = color;
         this->draw();
     }
 
     Point * getPosition() {
-        return  new Point(x, y);
+        return point;
     }
 
     std::string toString() {
         return " position ";
     }
 
-    int getColor()
-    {
+    int getColor() {
         return this->color;
     }
 
-    void draw()
-    {
+    void draw() {
         float d = 0.02;
         float width =  0.080;
         float height = 0.080;
         driver->setColor(color);
         driver->drawBar(
-                (float) (-0.99 + width * x + d * x),
-                (float) (0.9 - height * y - d * y),
+                (float) (-0.99 + width * point->getX() + d * point->getX()),
+                (float) (0.9 - height * point->getY() - d * point->getY()),
                 width,
                 height,
                 this->color
@@ -79,19 +73,19 @@ public:
 
 
     virtual void left() {
-        x--;
+        point->setX(point->getX() - 1);
     }
 
     virtual void right() {
-        x++;
+        point->setX(point->getX() + 1);
     }
 
     virtual void top() {
-        y--;
+        point->setY(point->getY() - 1);
     }
 
     virtual void bottom() {
-        y++;
+        point->setY(point->getY() + 1);
     }
 
 };

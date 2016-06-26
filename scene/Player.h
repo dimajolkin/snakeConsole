@@ -12,7 +12,6 @@ class Player {
 protected:
     int level = 0;
     bool life = true;
-
     Sector *start;
 public:
 
@@ -54,23 +53,6 @@ public:
 
     void decLevel() {
         level--;
-    }
-
-    virtual void move(char key) {
-        switch (key) {
-            case InputDriver::KEY_TOP:
-                this->top();
-                break;
-            case InputDriver::KEY_BOTTOM:
-                this->bottom();
-                break;
-            case InputDriver::KEY_LEFT:
-                this->left();
-                break;
-            case InputDriver::KEY_RIGHT:
-                this->right();
-                break;
-        }
     }
 
 

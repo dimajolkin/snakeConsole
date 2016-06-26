@@ -8,16 +8,21 @@ const unsigned int SPEED = 200; //ms
 Driver *driver;
 Scene *scene;
 
+
 SnakePlayer *p = new SnakePlayer(1, 1, Color::RED);
+Controller<SnakePlayer> controller1(p, 'w', 's', 'a', 'd');
+
+SnakePlayer *p2 = new SnakePlayer(1, 5, Color::GREEN);
+Controller<SnakePlayer> controller2(p2, 't', 'g', 'f', 'h');
+
+
 
 void keyboard(unsigned char key, int x, int y) {
+
+    controller1.upKey(key);
+    controller2.upKey(key);
+
     switch (key) {
-        case InputDriver::KEY_TOP:
-        case InputDriver::KEY_BOTTOM:
-        case InputDriver::KEY_RIGHT:
-        case InputDriver::KEY_LEFT:
-            p->setKey(key);
-            break;
         case '+':
             p->incLevel();
             break;
@@ -26,11 +31,11 @@ void keyboard(unsigned char key, int x, int y) {
         default:
             NULL;
     }
-    driver->refresh();
 }
 
 void timer(int) {
-    p->autoMove();
+    controller1.move();
+    controller2.move();
     //синхронизация множества сетевых змей
     driver->refresh();
     driver->setTimer(SPEED, timer);
@@ -41,6 +46,7 @@ int main(int argc, char *argv[]) {
     scene = new Scene();
     scene->addFoodInRandomPosition();
     scene->add(p);
+    scene->add(p2);
 
     driver = Driver::getInstance();
     driver->setWindowSize(800, 800);

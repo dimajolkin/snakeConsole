@@ -6,20 +6,29 @@
 #define SNAKE_PLAYERCOLLECTION_H
 class PlayerCollection {
 
-    SnakePlayer *p;
+   std::vector<SnakePlayer*> players;
 public:
     void add(SnakePlayer *player) {
-        p =player;
+        players.push_back(&(*player));
     }
 
+    PlayerCollection() {
+        players.reserve(1);
+    }
 
     template<class UnaryFunction>
     void foreach(UnaryFunction callback) {
-        callback(p);
+
+        for (std::vector<SnakePlayer*>::iterator p = players.begin(); p != players.end(); ++p) {
+            callback(*p);
+        }
+
     }
 
     void draw() {
-        p->draw();
+       foreach([](SnakePlayer *player) {
+           player->draw();
+       });
     }
 
 };

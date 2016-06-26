@@ -7,10 +7,7 @@
 class InputDriver {
     char simbol;
 public:
-    static const int KEY_TOP = 'w';
-    static const int KEY_BOTTOM = 's';
-    static const int KEY_LEFT = 'a';
-    static const int KEY_RIGHT = 'd';
+
 
     bool isRun() {
         return simbol != '0';
