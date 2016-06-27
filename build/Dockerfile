@@ -1,8 +1,10 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
-RUN apt-get install -y freeglut3
+RUN apt update &&  apt-get install -y freeglut3
+
+VOLUME  /tmp/.X11-unix:/tmp/.X11-unix 
 
 ADD /snake.run /root
 
-#CMD ./a.out
+CMD DISPLAY=:0 /root/snake.run
 

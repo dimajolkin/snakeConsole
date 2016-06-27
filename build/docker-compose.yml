@@ -1,2 +1,6 @@
 snake:
    build: ./
+   net:
+      "host"
+   environment:
+      DISPLAY : $DISPLAY
