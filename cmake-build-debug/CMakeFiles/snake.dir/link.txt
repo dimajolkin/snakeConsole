@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -lGL -lglut -g   CMakeFiles/snake.dir/main.cpp.o  -o snake 
