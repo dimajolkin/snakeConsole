@@ -4,7 +4,9 @@
 ### Запуск
 ```
  sudo xhost + && docker-compose run app
+```
 
 ### Сборка
 ```
  make
+```
