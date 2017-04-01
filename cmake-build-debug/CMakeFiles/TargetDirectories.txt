@@ -1,3 +1,0 @@
-/home/dima/github/snakeConsole/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/dima/github/snakeConsole/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/dima/github/snakeConsole/cmake-build-debug/CMakeFiles/snake.dir
